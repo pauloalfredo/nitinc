@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NIT INC - Inovação em Cardiologia</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+theme:{
+extend:{
+colors:{
+incRed:"#E11D2E",
+incBlue:"#B9CBE0",
+incDark:"#333",
+incGray:"#EAEAEA"
+}
+}
+}
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Inter',sans-serif;
+overflow-x:hidden;
+}
+
+/* fundo tecnológico */
+
+.tech-bg{
+background:
+radial-gradient(circle at 20% 30%, rgba(225,29,46,0.2), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(185,203,224,0.2), transparent 40%);
+}
+
+/* animação ECG */
+
+.ecg{
+position:absolute;
+width:200%;
+height:120px;
+bottom:0;
+left:-50%;
+}
+
+.ecg path{
+stroke:#E11D2E;
+stroke-width:3;
+fill:none;
+stroke-dasharray:1000;
+stroke-dashoffset:1000;
+animation:ecg 6s linear infinite;
+}
+
+@keyframes ecg{
+to{
+stroke-dashoffset:0;
+}
+}
+
+/* partículas tecnológicas */
+
+.particles{
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:0;
+}
+
+.particles span{
+position:absolute;
+width:4px;
+height:4px;
+background:#B9CBE0;
+border-radius:50%;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-100vh)}
+}
+
+/* glow tecnológico */
+
+.glow{
+text-shadow:
+0 0 10px rgba(225,29,46,0.6),
+0 0 20px rgba(225,29,46,0.4);
+}
+
+/* cards */
+
+.card{
+transition:all .3s;
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+</style>
+
+</head>
+
+<body class="bg-white">
+
+<!-- partículas -->
+
+<div class="particles">
+<span style="left:10%; animation-duration:12s;"></span>
+<span style="left:30%; animation-duration:9s;"></span>
+<span style="left:60%; animation-duration:14s;"></span>
+<span style="left:80%; animation-duration:11s;"></span>
+</div>
+
+<!-- header -->
+
+<header class="bg-white shadow-md relative z-10">
+
+<div class="max-w-7xl mx-auto flex justify-between items-center p-6">
+
+<h1 class="text-2xl font-bold text-incRed">
+NIT INC
+</h1>
+
+<nav class="flex gap-8 text-incDark font-medium">
+
+<a href="#">Início</a>
+<a href="#">Tecnologias</a>
+<a href="#">Inovação</a>
+<a href="#">Parcerias</a>
+<a href="#">Contato</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- hero -->
+
+<section class="tech-bg relative text-white bg-gradient-to-r from-incRed to-red-700 py-32 overflow-hidden">
+
+<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center px-6 relative z-10">
+
+<div>
+
+<h1 class="text-5xl font-bold leading-tight glow">
+
+Inovação em  
+Cardiologia  
+e Tecnologia em Saúde
+
+</h1>
+
+<p class="mt-6 text-lg">
+
+O Núcleo de Inovação Tecnológica do Instituto Nacional de Cardiologia
+atua na proteção do conhecimento científico e no desenvolvimento de
+soluções tecnológicas para a saúde.
+
+</p>
+
+<button class="mt-8 bg-white text-incRed px-6 py-3 rounded-lg font-semibold hover:scale-105 transition">
+
+Registrar Invenção
+
+</button>
+
+</div>
+
+<div>
+
+<img
+src="https://images.unsplash.com/photo-1588776814546-ec7e5b1f0c34"
+class="rounded-xl shadow-2xl"
+/>
+
+</div>
+
+</div>
+
+<!-- linha ECG -->
+
+<svg class="ecg" viewBox="0 0 1200 200">
+
+<path d="
+
+M0 100
+L150 100
+L200 60
+L250 140
+L300 40
+L350 160
+L400 100
+L600 100
+L650 60
+L700 140
+L750 40
+L800 160
+L850 100
+L1200 100
+
+"/>
+
+</svg>
+
+</section>
+
+<!-- serviços -->
+
+<section class="py-24 bg-incGray">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl font-bold text-center text-incDark">
+
+Serviços do NIT
+
+</h2>
+
+<div class="grid md:grid-cols-3 gap-10 mt-14">
+
+<div class="card bg-white p-8 rounded-xl">
+
+<h3 class="text-xl font-semibold text-incRed">
+
+Proteção de Patentes
+
+</h3>
+
+<p class="mt-4 text-gray-600">
+
+Registro e proteção da propriedade intelectual
+das pesquisas científicas.
+
+</p>
+
+</div>
+
+<div class="card bg-white p-8 rounded-xl">
+
+<h3 class="text-xl font-semibold text-incRed">
+
+Transferência de Tecnologia
+
+</h3>
+
+<p class="mt-4 text-gray-600">
+
+Transformamos pesquisa em inovação
+para a sociedade.
+
+</p>
+
+</div>
+
+<div class="card bg-white p-8 rounded-xl">
+
+<h3 class="text-xl font-semibold text-incRed">
+
+Inovação Científica
+
+</h3>
+
+<p class="mt-4 text-gray-600">
+
+Apoio ao desenvolvimento tecnológico
+na área da cardiologia.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- tecnologias -->
+
+<section class="py-24">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl font-bold text-center text-incDark">
+
+Tecnologias em Destaque
+
+</h2>
+
+<div class="grid md:grid-cols-3 gap-10 mt-16">
+
+<div class="card border p-6 rounded-xl">
+
+<h3 class="font-bold text-lg">
+
+Monitoramento Cardíaco Inteligente
+
+</h3>
+
+<p class="mt-3 text-gray-600">
+
+Dispositivo para acompanhamento remoto
+de pacientes cardíacos.
+
+</p>
+
+</div>
+
+<div class="card border p-6 rounded-xl">
+
+<h3 class="font-bold text-lg">
+
+IA para Diagnóstico
+
+</h3>
+
+<p class="mt-3 text-gray-600">
+
+Análise automatizada de exames cardiológicos.
+
+</p>
+
+</div>
+
+<div class="card border p-6 rounded-xl">
+
+<h3 class="font-bold text-lg">
+
+Biomateriais Médicos
+
+</h3>
+
+<p class="mt-3 text-gray-600">
+
+Pesquisa em novos materiais para próteses.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- footer -->
+
+<footer class="bg-incDark text-white py-12">
+
+<div class="max-w-7xl mx-auto text-center">
+
+<h3 class="text-xl font-semibold">
+
+Núcleo de Inovação Tecnológica
+
+</h3>
+
+<p class="mt-2">
+
+Instituto Nacional de Cardiologia
+
+</p>
+
+<p class="mt-4 text-sm text-gray-400">
+
+© 2026 - Todos os direitos reservados
+
+</p>
+
+</div>
+
+</footer>
+
+</body>
+</html>
