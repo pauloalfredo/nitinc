@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>NIT INC - Inovação em Cardiologia</title>
 
@@ -16,8 +16,7 @@ extend:{
 colors:{
 incRed:"#E11D2E",
 incBlue:"#B9CBE0",
-incDark:"#333",
-incGray:"#EAEAEA"
+incDark:"#1f2937"
 }
 }
 }
@@ -30,117 +29,84 @@ incGray:"#EAEAEA"
 
 body{
 font-family:'Inter',sans-serif;
-overflow-x:hidden;
+scroll-behavior:smooth;
 }
 
 /* fundo tecnológico */
 
 .tech-bg{
 background:
-radial-gradient(circle at 20% 30%, rgba(225,29,46,0.2), transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(185,203,224,0.2), transparent 40%);
+radial-gradient(circle at 20% 20%, rgba(225,29,46,0.15), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(185,203,224,0.15), transparent 40%);
 }
 
-/* animação ECG */
-
-.ecg{
-position:absolute;
-width:200%;
-height:120px;
-bottom:0;
-left:-50%;
-}
-
-.ecg path{
-stroke:#E11D2E;
-stroke-width:3;
-fill:none;
-stroke-dasharray:1000;
-stroke-dashoffset:1000;
-animation:ecg 6s linear infinite;
-}
-
-@keyframes ecg{
-to{
-stroke-dashoffset:0;
-}
-}
-
-/* partículas tecnológicas */
-
-.particles{
-position:absolute;
-width:100%;
-height:100%;
-overflow:hidden;
-z-index:0;
-}
-
-.particles span{
-position:absolute;
-width:4px;
-height:4px;
-background:#B9CBE0;
-border-radius:50%;
-animation:float 10s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-100vh)}
-}
-
-/* glow tecnológico */
+/* glow */
 
 .glow{
-text-shadow:
-0 0 10px rgba(225,29,46,0.6),
-0 0 20px rgba(225,29,46,0.4);
+text-shadow:0 0 12px rgba(225,29,46,.6);
 }
 
 /* cards */
 
 .card{
-transition:all .3s;
+transition:all .35s;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.03);
-box-shadow:0 15px 40px rgba(0,0,0,0.15);
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* ECG */
+
+.ecg path{
+stroke:#E11D2E;
+stroke-width:3;
+fill:none;
+stroke-dasharray:1200;
+stroke-dashoffset:1200;
+animation:beat 5s linear infinite;
+}
+
+@keyframes beat{
+to{stroke-dashoffset:0}
+}
+
+/* animação scroll */
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
 }
 
 </style>
 
 </head>
 
-<body class="bg-white">
+<body class="bg-white text-gray-800">
 
-<!-- partículas -->
+<!-- HEADER -->
 
-<div class="particles">
-<span style="left:10%; animation-duration:12s;"></span>
-<span style="left:30%; animation-duration:9s;"></span>
-<span style="left:60%; animation-duration:14s;"></span>
-<span style="left:80%; animation-duration:11s;"></span>
-</div>
+<header class="fixed w-full bg-white shadow z-50">
 
-<!-- header -->
+<div class="max-w-7xl mx-auto flex justify-between items-center p-5">
 
-<header class="bg-white shadow-md relative z-10">
-
-<div class="max-w-7xl mx-auto flex justify-between items-center p-6">
-
-<h1 class="text-2xl font-bold text-incRed">
+<h1 class="text-xl font-bold text-incRed">
 NIT INC
 </h1>
 
-<nav class="flex gap-8 text-incDark font-medium">
+<nav class="hidden md:flex gap-8 font-medium">
 
-<a href="#">Início</a>
-<a href="#">Tecnologias</a>
-<a href="#">Inovação</a>
-<a href="#">Parcerias</a>
-<a href="#">Contato</a>
+<a href="#inicio">Início</a>
+<a href="#servicos">Serviços</a>
+<a href="#impacto">Impacto</a>
+<a href="#tecnologias">Tecnologias</a>
 
 </nav>
 
@@ -148,11 +114,11 @@ NIT INC
 
 </header>
 
-<!-- hero -->
+<!-- HERO -->
 
-<section class="tech-bg relative text-white bg-gradient-to-r from-incRed to-red-700 py-32 overflow-hidden">
+<section id="inicio" class="tech-bg pt-36 pb-28 bg-gradient-to-r from-red-700 to-incRed text-white">
 
-<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center px-6 relative z-10">
+<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
 
 <div>
 
@@ -164,15 +130,15 @@ e Tecnologia em Saúde
 
 </h1>
 
-<p class="mt-6 text-lg">
+<p class="mt-6 text-lg opacity-90">
 
 O Núcleo de Inovação Tecnológica do Instituto Nacional de Cardiologia
-atua na proteção do conhecimento científico e no desenvolvimento de
-soluções tecnológicas para a saúde.
+atua na proteção do conhecimento científico, desenvolvimento tecnológico
+e transferência de inovação para a sociedade.
 
 </p>
 
-<button class="mt-8 bg-white text-incRed px-6 py-3 rounded-lg font-semibold hover:scale-105 transition">
+<button class="mt-8 bg-white text-incRed px-7 py-3 rounded-lg font-semibold hover:scale-105 transition">
 
 Registrar Invenção
 
@@ -191,48 +157,29 @@ class="rounded-xl shadow-2xl"
 
 </div>
 
-<!-- linha ECG -->
+<svg class="ecg mt-20" viewBox="0 0 1200 200">
 
-<svg class="ecg" viewBox="0 0 1200 200">
-
-<path d="
-
-M0 100
-L150 100
-L200 60
-L250 140
-L300 40
-L350 160
-L400 100
-L600 100
-L650 60
-L700 140
-L750 40
-L800 160
-L850 100
-L1200 100
-
-"/>
+<path d="M0 100 L150 100 L200 60 L250 140 L300 40 L350 160 L400 100 L600 100 L650 60 L700 140 L750 40 L800 160 L850 100 L1200 100"/>
 
 </svg>
 
 </section>
 
-<!-- serviços -->
+<!-- SERVIÇOS -->
 
-<section class="py-24 bg-incGray">
+<section id="servicos" class="py-24 bg-gray-100">
 
-<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-7xl mx-auto px-6 text-center">
 
-<h2 class="text-4xl font-bold text-center text-incDark">
+<h2 class="text-4xl font-bold mb-16 reveal">
 
 Serviços do NIT
 
 </h2>
 
-<div class="grid md:grid-cols-3 gap-10 mt-14">
+<div class="grid md:grid-cols-3 gap-10">
 
-<div class="card bg-white p-8 rounded-xl">
+<div class="card bg-white p-8 rounded-xl reveal">
 
 <h3 class="text-xl font-semibold text-incRed">
 
@@ -242,14 +189,14 @@ Proteção de Patentes
 
 <p class="mt-4 text-gray-600">
 
-Registro e proteção da propriedade intelectual
-das pesquisas científicas.
+Apoio completo no registro de patentes e proteção
+da propriedade intelectual gerada nas pesquisas.
 
 </p>
 
 </div>
 
-<div class="card bg-white p-8 rounded-xl">
+<div class="card bg-white p-8 rounded-xl reveal">
 
 <h3 class="text-xl font-semibold text-incRed">
 
@@ -259,14 +206,14 @@ Transferência de Tecnologia
 
 <p class="mt-4 text-gray-600">
 
-Transformamos pesquisa em inovação
-para a sociedade.
+Conectamos pesquisa científica a empresas e parceiros
+interessados em inovação.
 
 </p>
 
 </div>
 
-<div class="card bg-white p-8 rounded-xl">
+<div class="card bg-white p-8 rounded-xl reveal">
 
 <h3 class="text-xl font-semibold text-incRed">
 
@@ -276,8 +223,8 @@ Inovação Científica
 
 <p class="mt-4 text-gray-600">
 
-Apoio ao desenvolvimento tecnológico
-na área da cardiologia.
+Estimulo ao desenvolvimento de tecnologias
+para a cardiologia e saúde digital.
 
 </p>
 
@@ -289,21 +236,69 @@ na área da cardiologia.
 
 </section>
 
-<!-- tecnologias -->
+<!-- IMPACTO -->
 
-<section class="py-24">
+<section id="impacto" class="py-24">
 
-<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-6xl mx-auto text-center px-6">
 
-<h2 class="text-4xl font-bold text-center text-incDark">
+<h2 class="text-4xl font-bold mb-16 reveal">
+
+Impacto da Inovação
+
+</h2>
+
+<div class="grid md:grid-cols-4 gap-10 text-center">
+
+<div class="reveal">
+
+<h3 class="text-5xl font-bold text-incRed counter" data-target="25">0</h3>
+<p class="mt-3">Patentes</p>
+
+</div>
+
+<div class="reveal">
+
+<h3 class="text-5xl font-bold text-incRed counter" data-target="18">0</h3>
+<p class="mt-3">Pesquisas</p>
+
+</div>
+
+<div class="reveal">
+
+<h3 class="text-5xl font-bold text-incRed counter" data-target="12">0</h3>
+<p class="mt-3">Parcerias</p>
+
+</div>
+
+<div class="reveal">
+
+<h3 class="text-5xl font-bold text-incRed counter" data-target="6">0</h3>
+<p class="mt-3">Startups</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- TECNOLOGIAS -->
+
+<section id="tecnologias" class="py-24 bg-gray-100">
+
+<div class="max-w-7xl mx-auto px-6 text-center">
+
+<h2 class="text-4xl font-bold mb-16 reveal">
 
 Tecnologias em Destaque
 
 </h2>
 
-<div class="grid md:grid-cols-3 gap-10 mt-16">
+<div class="grid md:grid-cols-3 gap-10">
 
-<div class="card border p-6 rounded-xl">
+<div class="card bg-white p-6 rounded-xl reveal">
 
 <h3 class="font-bold text-lg">
 
@@ -313,14 +308,13 @@ Monitoramento Cardíaco Inteligente
 
 <p class="mt-3 text-gray-600">
 
-Dispositivo para acompanhamento remoto
-de pacientes cardíacos.
+Tecnologia para acompanhamento remoto de pacientes cardíacos.
 
 </p>
 
 </div>
 
-<div class="card border p-6 rounded-xl">
+<div class="card bg-white p-6 rounded-xl reveal">
 
 <h3 class="font-bold text-lg">
 
@@ -330,13 +324,13 @@ IA para Diagnóstico
 
 <p class="mt-3 text-gray-600">
 
-Análise automatizada de exames cardiológicos.
+Sistema de inteligência artificial para análise de exames.
 
 </p>
 
 </div>
 
-<div class="card border p-6 rounded-xl">
+<div class="card bg-white p-6 rounded-xl reveal">
 
 <h3 class="font-bold text-lg">
 
@@ -346,7 +340,7 @@ Biomateriais Médicos
 
 <p class="mt-3 text-gray-600">
 
-Pesquisa em novos materiais para próteses.
+Pesquisa avançada em novos biomateriais para próteses.
 
 </p>
 
@@ -358,11 +352,11 @@ Pesquisa em novos materiais para próteses.
 
 </section>
 
-<!-- footer -->
+<!-- FOOTER -->
 
-<footer class="bg-incDark text-white py-12">
+<footer class="bg-incDark text-white py-14">
 
-<div class="max-w-7xl mx-auto text-center">
+<div class="max-w-6xl mx-auto text-center">
 
 <h3 class="text-xl font-semibold">
 
@@ -370,13 +364,13 @@ Núcleo de Inovação Tecnológica
 
 </h3>
 
-<p class="mt-2">
+<p class="mt-3">
 
 Instituto Nacional de Cardiologia
 
 </p>
 
-<p class="mt-4 text-sm text-gray-400">
+<p class="mt-5 text-sm opacity-70">
 
 © 2026 - Todos os direitos reservados
 
@@ -385,6 +379,64 @@ Instituto Nacional de Cardiologia
 </div>
 
 </footer>
+
+<script>
+
+/* animação scroll */
+
+const reveals=document.querySelectorAll(".reveal")
+
+function reveal(){
+
+reveals.forEach(el=>{
+
+const windowHeight=window.innerHeight
+const top=el.getBoundingClientRect().top
+
+if(top<windowHeight-80){
+
+el.classList.add("active")
+
+}
+
+})
+
+}
+
+window.addEventListener("scroll",reveal)
+reveal()
+
+/* contador */
+
+const counters=document.querySelectorAll(".counter")
+
+counters.forEach(counter=>{
+
+const update=()=>{
+
+const target=+counter.dataset.target
+const value=+counter.innerText
+
+const increment=target/80
+
+if(value<target){
+
+counter.innerText=Math.ceil(value+increment)
+setTimeout(update,30)
+
+}else{
+
+counter.innerText=target
+
+}
+
+}
+
+update()
+
+})
+
+</script>
 
 </body>
 </html>
