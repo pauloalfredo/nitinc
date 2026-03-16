@@ -3,254 +3,255 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NIT INC | Inovação em Cardiologia Avançada</title>
+  <title>NIT INC | Inovação Tecnológica em Cardiologia Avançada</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    /* DEFINIÇÃO DE CORES E FONTES */
-    :root {
-      --inc-red: #E22525;
-      --inc-dark: #333333;
-      --inc-black: #080a10;
-      --inc-ice: #D1DFF0;
-    }
 
-    @font-face {
-      font-family: 'Museo Sans';
-      src: local('Museo Sans 300'), local('MuseoSans-300');
-      font-weight: 300;
-    }
-    @font-face {
-      font-family: 'Museo Sans';
-      src: local('Museo Sans 700'), local('MuseoSans-700');
-      font-weight: 700;
+  <style>
+    :root {
+      --font-family-base: 'Museo Sans', 'Montserrat', sans-serif;
+      --inc-red: #E22525;
     }
 
     body {
-      font-family: 'Museo Sans', sans-serif;
-      font-weight: 300; /* Museo Sans 300 */
-      background: var(--inc-black);
+      font-family: var(--font-family-base);
+      font-weight: 300;
+      background: #080a10;
       color: #e2e8f0;
       overflow-x: hidden;
     }
 
-    h1, h2, h3, b, strong, .font-bold {
-      font-weight: 700 !important; /* Museo Sans 700 */
+    h1, h2, h3, h4, .font-bold {
+      font-weight: 700 !important;
+      letter-spacing: -0.02em;
     }
 
-    /* Background Interativo */
-    #particles-js, #heart3d {
+    #particles-js {
       position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    #heart3d {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       z-index: 0;
       opacity: 0.4;
       pointer-events: none;
+      filter: drop-shadow(0 0 10px rgba(255, 59, 59, 0.5));
+    }
+
+    .heroContent {
+      position: relative;
+      z-index: 2;
     }
 
     .digital-lines {
-      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 50px 50px;
     }
 
-    /* Tech Cards para o FAQ */
-    .faq-card {
-      background: rgba(51, 51, 51, 0.3);
-      border: 1px solid rgba(226, 37, 37, 0.1);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .faq-card:hover {
-      border-color: var(--inc-red);
-      transform: translateX(10px);
-      background: rgba(226, 37, 37, 0.05);
-    }
-
-    /* Animação ECG */
     .ecg path {
-      stroke: var(--inc-red);
+      stroke: #ff3b3b;
       stroke-width: 2;
       fill: none;
       stroke-dasharray: 1200;
       stroke-dashoffset: 1200;
       animation: beat 4s linear infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 59, 59, 0.8));
     }
-    @keyframes beat { to { stroke-dashoffset: 0; } }
 
-    details summary { list-style: none; }
+    @keyframes beat {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .tech-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Estilo para o FAQ (Acordeão) */
+    details summary { list-style: none; cursor: pointer; }
     details summary::-webkit-details-marker { display: none; }
+    details[open] summary { color: #00ffff; }
   </style>
 </head>
+
 <body>
 
-  <header class="absolute top-0 w-full flex justify-center p-10 z-20">
-    <img src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" alt="NIT Logo" class="h-20">
+  <header class="absolute top-0 w-full flex justify-center items-center p-8 z-10">
+    <img 
+      src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" 
+      alt="Logo NIT INC"
+      class="h-16 filter drop-shadow(0 0 8px rgba(255,255,255,0.3))"
+    />
   </header>
 
   <section class="relative h-screen flex items-center justify-center text-center digital-lines px-6">
     <div id="particles-js"></div>
     <canvas id="heart3d"></canvas>
 
-    <div class="relative z-10 max-w-5xl">
-      <div class="inline-block px-4 py-1 mb-6 rounded-full border border-red-500/30 bg-red-950/20 text-[--inc-red] text-xs tracking-[0.3em] uppercase font-bold">
-        Inovação Cardiovascular
+    <div class="heroContent max-w-5xl">
+      <div class="inline-block px-4 py-1 mb-4 rounded-full border border-cyan-500/30 bg-cyan-950/50 text-cyan-400 text-sm tracking-widest uppercase font-bold">
+        Futuro da Cardiologia
       </div>
-      <h1 class="text-5xl md:text-7xl mb-6 leading-tight">Núcleo de Inovação<br>Tecnológica</h1>
-      <p class="text-xl md:text-2xl text-[--inc-ice] opacity-80 uppercase tracking-widest font-bold">
-        Instituto Nacional de Cardiologia
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+        Núcleo de Inovação Tecnológica
+      </h1>
+      <p class="text-xl md:text-2xl opacity-90 text-red-400 font-bold mb-10 tracking-tight">
+        INSTITUTO NACIONAL DE CARDIOLOGIA
+      </p>
+      <p class="mt-6 text-xl opacity-80 max-w-3xl mx-auto font-light leading-relaxed">
+        Proteção de patentes, transferência de tecnologia e desenvolvimento de soluções de <span class="text-cyan-400 font-bold">IA e bioengenharia</span> aplicadas à saúde cardiovascular.
       </p>
     </div>
   </section>
 
-  <section class="relative py-24 bg-[--inc-dark] px-6">
+  <section class="py-24 bg-[#333333] px-6 border-y border-gray-700">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl mb-10 text-white">Quem somos nós</h2>
-      <div class="h-1 w-20 bg-[--inc-red] mx-auto mb-10"></div>
-      <p class="text-xl leading-relaxed font-light text-[--inc-ice]">
-        O <strong>Instituto Nacional de Cardiologia (INC)</strong> é a unidade de referência do Ministério da Saúde para o tratamento de alta complexidade de doenças cardíacas. Além da assistência, possui competências ampliadas para ensino, pesquisa e inovação.
-      </p>
-      <p class="mt-6 text-lg font-light opacity-80">
-        Foi reconhecido como Instituição Científica, Tecnológica e de Inovação (ICT) pública em 21/07/2021, e em 06/11/2021 o <strong>NIT INC</strong> foi criado através da Portaria nº 200, responsável por gerir a política de inovação e transformar ciência em soluções para a saúde.
+      <h2 class="text-4xl font-bold mb-8 text-white">Quem somos nós</h2>
+      <p class="text-lg leading-relaxed font-light text-gray-300">
+        <strong>Instituto Nacional de Cardiologia (INC)</strong>: Unidade de referência do Ministério da Saúde para o tratamento de alta complexidade de doenças cardíacas. Além da assistência, possui competências ampliadas para ensino, pesquisa e inovação. Foi reconhecido como Instituição Científica, Tecnológica e de Inovação (ICT) pública em 21/07/2021, e em 06/11/2021 o <strong>Núcleo de Inovação Tecnológica (NIT)</strong> foi criado através da Portaria nº 200 de 24 de novembro de 2021.
       </p>
     </div>
   </section>
 
-  <section class="py-24 bg-[--inc-black] px-6 digital-lines">
+  <section class="py-24 bg-[#080a10] px-6 digital-lines">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center">Conheça nosso trabalho</h2>
-
-      <div class="grid gap-6">
-        <details class="faq-card p-6 rounded-lg group">
-          <summary class="text-xl font-bold flex justify-between items-center group-open:text-[--inc-red]">
-            O que é considerado uma criação?
-            <i class="fas fa-plus text-sm group-open:rotate-45 transition-transform"></i>
-          </summary>
-          <p class="mt-4 text-gray-400 leading-relaxed">
-            Qualquer invenção, modelo de utilidade, desenho industrial, programa de computador, topografia de circuito integrado, nova cultivar ou qualquer outro desenvolvimento tecnológico que possa acarretar o surgimento de um novo produto ou processo ou aperfeiçoamento incremental.
-          </p>
+      <h2 class="text-4xl font-bold mb-16 text-center text-white">NIT INC</h2>
+      
+      <div class="grid gap-4">
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">O que é considerado uma criação? <i class="fas fa-plus text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">Qualquer invenção, modelo de utilidade, desenho industrial, programa de computador, topografia de circuito integrado, nova cultivar ou cultivar essencialmente derivada e qualquer outro desenvolvimento tecnológico que possa acarretar o surgimento de um novo produto ou processo ou aperfeiçoamento incremental, obtida por um ou mais criadores.</p>
         </details>
 
-        <details class="faq-card p-6 rounded-lg group">
-          <summary class="text-xl font-bold flex justify-between items-center">
-            O que é Inovação e ICT?
-            <i class="fas fa-plus text-sm group-open:rotate-45 transition-transform"></i>
-          </summary>
-          <div class="mt-4 text-gray-400 space-y-4">
-            <p><strong>Inovação:</strong> São produtos ou processos novos ou melhorados, que diferem de produtos e processos anteriores, disponibilizados para uso.</p>
-            <p><strong>ICT:</strong> Instituição Científica Tecnológica é o órgão da administração pública com missão de pesquisa científica ou desenvolvimento de novos produtos e processos.</p>
-          </div>
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">O que é Inovação? <i class="fas fa-plus text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">São produtos ou processos novos ou melhorados, que diferem de produtos e processos anteriores, e que são disponibilizados para usuários potenciais (produtos) ou para uso geral (processos).</p>
         </details>
 
-        <details class="faq-card p-6 rounded-lg group">
-          <summary class="text-xl font-bold flex justify-between items-center">
-            Qual a importância do NIT para o pesquisador?
-            <i class="fas fa-plus text-sm group-open:rotate-45 transition-transform"></i>
-          </summary>
-          <p class="mt-4 text-gray-400">
-            Os NITs são cruciais para proteger a propriedade intelectual, dar forma à inovação, identificar oportunidades de transferência de tecnologia e oferecer acesso a recursos de alto nível.
-          </p>
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">O que é ICT? <i class="fas fa-plus text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">Instituição Científica Tecnológica é o órgão da administração pública, que inclua em sua missão institucional a pesquisa básica ou aplicada de caráter científico ou tecnológico ou o desenvolvimento de novos produtos, serviços ou processos.</p>
         </details>
 
-        <details class="faq-card p-6 rounded-lg group">
-          <summary class="text-xl font-bold flex justify-between items-center">
-            Posso publicar minha pesquisa e depois patentear?
-            <i class="fas fa-plus text-sm group-open:rotate-45 transition-transform"></i>
-          </summary>
-          <div class="mt-4 text-[--inc-ice] bg-red-900/20 p-4 border-l-4 border-[--inc-red]">
-            <p><strong>Atenção:</strong> A proteção deve ocorrer ANTES da publicação. A divulgação prévia pode inviabilizar a proteção intelectual. Não há impedimento para patentear e publicar, mas a ordem das escolhas afeta o resultado. Procure o NIT antes de publicar!</p>
-          </div>
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">O que é NIT? <i class="fas fa-plus text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">Núcleo de Inovação Tecnológica é uma estrutura instituída por uma ou mais ICTs, que tenha por finalidade a gestão de política institucional de inovação e por competências mínimas as atribuições previstas para fins de cumprimento da Lei N° 10.973/04.</p>
         </details>
 
-        <details class="faq-card p-6 rounded-lg group">
-          <summary class="text-xl font-bold flex justify-between items-center">
-            Sou aluno. Como proceder com meu trabalho de curso?
-            <i class="fas fa-plus text-sm group-open:rotate-45 transition-transform"></i>
-          </summary>
-          <p class="mt-4 text-gray-400">
-            Qualificações e defesas que envolvam conhecimentos passíveis de proteção devem ser realizadas em bancas fechadas com termos de confidencialidade. Converse com seu orientador e busque auxílio no NIT INC.
-          </p>
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">Qual a importância do NIT? <i class="fas fa-plus text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">Os NITs são importantes para os pesquisadores por proteger a propriedade intelectual, dar forma à inovação, identificar oportunidades de transferência de tecnologia e oferecer acesso a recursos e infraestrutura de pesquisa de alto nível.</p>
         </details>
-      </div>
 
-      <div class="mt-20 text-center bg-zinc-900/50 p-12 rounded-3xl border border-white/5">
-        <h3 class="text-3xl font-bold mb-4">Possui mais dúvidas?</h3>
-        <p class="text-[--inc-ice] mb-8 font-light">Para marcar um atendimento e entrar em contato conosco, preencha nosso formulário.</p>
-        <a href="LINK_DO_SEU_FORMULARIO" class="bg-[--inc-red] hover:bg-red-700 text-white px-12 py-4 rounded-full font-bold uppercase tracking-widest transition-all shadow-lg shadow-red-500/20">
-          Contato / Agendamento
-        </a>
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">O que é Patente? <i class="fas fa-plus text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">É um título de propriedade temporária sobre uma invenção ou modelo de utilidade, outorgados pelo Estado aos inventores que garante a exclusividade de uso econômico de sua criação.</p>
+        </details>
+
+        <details class="tech-card p-6 rounded-xl border-l-4 border-red-500">
+          <summary class="text-xl font-bold flex justify-between items-center text-red-400">Publicação vs Proteção <i class="fas fa-exclamation-triangle text-sm"></i></summary>
+          <p class="mt-4 text-gray-300 font-light">A proteção das criações deve ocorrer antes da publicação. Publicar antes pode inviabilizar a proteção intelectual. Não há impedimento para publicar e patentear, mas a ordem afeta o resultado. O NIT do INC deve ser procurado para esclarecimentos.</p>
+        </details>
+
+        <details class="tech-card p-6 rounded-xl">
+          <summary class="text-xl font-bold flex justify-between items-center">Sou aluno, o que devo fazer? <i class="fas fa-user-graduate text-sm"></i></summary>
+          <p class="mt-4 text-gray-400 font-light">Qualificações e defesas que envolvam conhecimentos passíveis de proteção devem ser realizadas em bancas fechadas com termo de confidencialidade. Busque auxílio junto ao NIT do INC.</p>
+        </details>
       </div>
     </div>
   </section>
 
-  <div class="bg-black py-10">
-    <svg class="ecg w-full h-24" viewBox="0 0 1200 200">
+  <section class="py-24 bg-[#050609] text-center px-6">
+    <div class="max-w-3xl mx-auto tech-card p-12 rounded-3xl border-t-4 border-red-500">
+      <h2 class="text-3xl font-bold mb-4 text-white">Possui mais dúvidas?</h2>
+      <p class="text-gray-400 mb-8">Saiba mais sobre quem nós somos e conheça melhor o nosso trabalho.</p>
+      <p class="mb-8 font-light italic">Para marcar um atendimento e entrar em contato conosco, preencha nosso formulário:</p>
+      <a href="#" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-full transition-all tracking-widest uppercase">
+        Contato
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-black py-12 px-6">
+    <svg class="ecg w-full max-w-6xl mx-auto" viewBox="0 0 1200 200">
       <path d="M0 100 L150 100 L200 60 L250 140 L300 40 L350 160 L400 100 L600 100 L650 60 L700 140 L750 40 L800 160 L850 100 L1200 100"/>
     </svg>
-  </div>
+  </section>
 
-  <footer class="py-20 bg-black text-center border-t border-[--inc-dark]">
-    <div class="flex justify-center gap-10 mb-12">
-      <a href="https://wa.me/SEUNUMERO" target="_blank" class="text-4xl hover:text-green-500 transition-all">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://instagram.com/nit.inc" target="_blank" class="text-4xl hover:text-pink-600 transition-all">
-        <i class="fab fa-instagram"></i>
-      </a>
+  <footer class="py-16 text-center bg-black border-t border-gray-800">
+    <div class="flex justify-center gap-8 mb-8 text-3xl">
+      <a href="#" target="_blank" class="text-gray-500 hover:text-green-500 transition-colors"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" target="_blank" class="text-gray-500 hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
     </div>
-    <img src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" alt="NIT" class="h-12 mx-auto mb-6 opacity-30">
-    <p class="text-white font-bold text-xl uppercase tracking-tighter">Instituto Nacional de Cardiologia</p>
-    <p class="text-sm opacity-40 mt-2 font-light">© 2026 NIT INC | Tecnologia e Inovação para a Vida</p>
+    <img src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" alt="NIT Logo" class="h-10 mx-auto mb-6 opacity-50"/>
+    <p class="font-bold text-white text-lg uppercase">Instituto Nacional de Cardiologia</p>
+    <p class="opacity-60 mt-3 text-sm font-light">© 2026 NIT INC - Núcleo de Inovação Tecnológica. Todos os direitos reservados.</p>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    /* Partículas Modernas */
     particlesJS("particles-js", {
       particles: {
-        number: { value: 60, density: { enable: true, value_area: 800 } },
-        color: { value: "#E22525" },
-        opacity: { value: 0.3 },
-        size: { value: 2 },
-        line_linked: { enable: true, distance: 150, color: "#E22525", opacity: 0.1, width: 1 },
-        move: { speed: 1 }
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ffff" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 2, random: true },
+        line_linked: { enable: true, distance: 150, color: "#00ffff", opacity: 0.1, width: 1 },
+        move: { speed: 0.8, direction: "none", out_mode: "out" }
       }
     });
 
-    /* Coração 3D em Partículas (Point Cloud) */
     const canvas = document.getElementById("heart3d");
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const heartShape = new THREE.Shape();
-    heartShape.moveTo(0, 0);
-    heartShape.bezierCurveTo(0, -3, -5, -3, -5, 0);
-    heartShape.bezierCurveTo(-5, 5, 0, 10, 0, 12);
-    heartShape.bezierCurveTo(0, 10, 5, 5, 5, 0);
-    heartShape.bezierCurveTo(5, -3, 0, -3, 0, 0);
+    const shape = new THREE.Shape();
+    const x = -2.5, y = -5;
+    shape.moveTo(x + 2.5, y + 2.5);
+    shape.bezierCurveTo(x + 2.5, y + 2.5, x + 2, y, x, y);
+    shape.bezierCurveTo(x - 3, y, x - 3, y + 3.5, x - 3, y + 3.5);
+    shape.bezierCurveTo(x - 3, y + 5.5, x - 1.5, y + 7.7, x + 2.5, y + 9.5);
+    shape.bezierCurveTo(x + 6, y + 7.7, x + 8, y + 5.5, x + 8, y + 3.5);
+    shape.bezierCurveTo(x + 8, y + 3.5, x + 8, y, x + 5, y);
+    shape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
 
-    const geometry = new THREE.ExtrudeGeometry(heartShape, { depth: 2, bevelEnabled: true, bevelSize: 1 });
-    geometry.center();
+    const geometry = new THREE.ExtrudeGeometry(shape, { depth: 1, bevelEnabled: true, bevelSegments: 3, steps: 2, bevelSize: 0.5, bevelThickness: 0.5 });
+    geometry.computeBoundingBox();
+    const offset = geometry.boundingBox.getCenter(new THREE.Vector3());
+    geometry.translate(-offset.x, -offset.y, -offset.z);
 
-    const material = new THREE.PointsMaterial({ color: 0xE22525, size: 0.15, transparent: true, opacity: 0.8 });
-    const heart = new THREE.Points(geometry, material);
-    heart.rotation.x = Math.PI;
-    scene.add(heart);
+    const material = new THREE.PointsMaterial({ color: 0xff3b3b, size: 0.15, transparent: true, opacity: 0.8, blending: THREE.AddBlending });
+    const heartPoints = new THREE.Points(geometry, material);
+    heartPoints.rotation.x = Math.PI;
+    scene.add(heartPoints);
 
-    camera.position.z = 18;
+    camera.position.z = 15;
 
     function animate() {
       requestAnimationFrame(animate);
-      heart.rotation.y += 0.008;
-      const pulse = 1 + Math.sin(Date.now() * 0.005) * 0.05;
-      heart.scale.set(pulse, pulse, pulse);
+      heartPoints.rotation.y += 0.003;
+      const pulse = 1 + Math.sin(Date.now() * 0.004) * 0.04;
+      heartPoints.scale.set(pulse, pulse, pulse);
+      material.opacity = 0.6 + Math.sin(Date.now() * 0.01) * 0.2;
       renderer.render(scene, camera);
     }
     animate();
