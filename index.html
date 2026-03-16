@@ -16,20 +16,17 @@
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-font-family:'Inter',museo sans 300;
+font-family:"MuseoSans",sans-serif;
 background:#0f172a;
 color:white;
 }
 
-/* fundo partículas */
+/* partículas */
 
 #particles-js{
 position:absolute;
@@ -38,7 +35,7 @@ height:100%;
 z-index:0;
 }
 
-/* canvas 3D */
+/* coração 3D */
 
 #heart3d{
 position:absolute;
@@ -57,7 +54,7 @@ position:relative;
 z-index:2;
 }
 
-/* linhas digitais */
+/* linhas IA */
 
 .digital-lines{
 background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
@@ -86,6 +83,22 @@ to{stroke-dashoffset:0}
 
 <body>
 
+<!-- HEADER -->
+
+<header class="absolute top-0 w-full flex justify-between items-center p-6 z-10">
+
+<img
+src="https://nitinc.com.br/wp-content/uploads/2023/07/Logo-INC_Prancheta-11-scaled-300x300.jpg"
+class="h-14"
+/>
+
+<img
+src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png"
+class="h-14"
+/>
+
+</header>
+
 <!-- HERO -->
 
 <section class="relative h-screen flex items-center justify-center text-center digital-lines">
@@ -98,25 +111,35 @@ to{stroke-dashoffset:0}
 
 <h1 class="text-6xl font-bold mb-6">
 
-NIT INC
+Núcleo de Inovação Tecnológica
 
 </h1>
 
 <p class="text-xl opacity-90">
 
-Núcleo de Inovação Tecnológica do  
 Instituto Nacional de Cardiologia
 
 </p>
 
 <p class="mt-6 opacity-80">
 
-Proteção de patentes, transferência de tecnologia e desenvolvimento
-de inovação científica em cardiologia.
+Proteção de patentes, transferência de tecnologia
+e desenvolvimento de inovação científica em cardiologia.
 
 </p>
 
 </div>
+
+</section>
+
+<!-- FOTO INC -->
+
+<section class="py-20 bg-black">
+
+<img
+src="https://nitinc.com.br/wp-content/uploads/2023/10/Fachada-INC-scaled.jpg"
+class="max-w-6xl mx-auto rounded-xl shadow-2xl"
+/>
 
 </section>
 
@@ -138,7 +161,7 @@ de inovação científica em cardiologia.
 
 <h2 class="text-4xl font-bold mb-16">
 
-Dashboard de Inovação
+Inovação e Propriedade Intelectual
 
 </h2>
 
@@ -150,52 +173,30 @@ Dashboard de Inovação
 
 </section>
 
+<!-- FOTO PESQUISA -->
+
+<section class="py-20 bg-gray-900">
+
+<img
+src="https://nitinc.com.br/wp-content/uploads/2023/10/Imagem-do-WhatsApp-de-2022-09-25-as-12.10.00.jpg"
+class="max-w-5xl mx-auto rounded-xl shadow-2xl"
+/>
+
+</section>
+
 <!-- MAPA -->
 
 <section class="py-24">
 
 <h2 class="text-4xl font-bold text-center mb-16">
 
-Mapa de Inovação
+Rede de Inovação
 
 </h2>
 
 <div id="map" class="h-96 max-w-5xl mx-auto rounded-xl"></div>
 
 </section>
-
-<!-- TECNOLOGIAS -->
-
-<section class="py-24 text-center bg-gray-900">
-
-<h2 class="text-4xl font-bold mb-16">
-
-Tecnologias em Desenvolvimento
-
-</h2>
-
-<div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
-
-<div class="bg-black p-8 rounded-xl">
-<h3 class="font-bold text-xl">IA em Cardiologia</h3>
-<p class="mt-4 opacity-80">Análise inteligente de exames cardíacos.</p>
-</div>
-
-<div class="bg-black p-8 rounded-xl">
-<h3 class="font-bold text-xl">Monitoramento Remoto</h3>
-<p class="mt-4 opacity-80">Tecnologias para acompanhamento de pacientes.</p>
-</div>
-
-<div class="bg-black p-8 rounded-xl">
-<h3 class="font-bold text-xl">Biomateriais</h3>
-<p class="mt-4 opacity-80">Pesquisa em novos materiais médicos.</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
 
 <footer class="py-12 text-center bg-black">
 
@@ -216,15 +217,10 @@ Tecnologias em Desenvolvimento
 particlesJS("particles-js",{
 
 particles:{
-
-number:{value:60},
-
+number:{value:70},
 size:{value:3},
-
 line_linked:{enable:true},
-
 move:{speed:1}
-
 }
 
 })
@@ -233,7 +229,7 @@ move:{speed:1}
 
 new Chart(document.getElementById("patentesChart"),{
 
-type:"bar",
+type:"line",
 
 data:{
 
@@ -243,7 +239,7 @@ datasets:[{
 
 label:"Patentes",
 
-data:[5,8,12,16,25]
+data:[4,7,11,18,26]
 
 }]
 
