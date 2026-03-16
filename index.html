@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>NIT INC - Inovação em Cardiologia</title>
+<title>NIT INC | Inovação em Cardiologia</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<script>
-tailwind.config = {
-theme:{
-extend:{
-colors:{
-incRed:"#E11D2E",
-incBlue:"#B9CBE0",
-incDark:"#1f2937"
-}
-}
-}
-}
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -30,38 +25,50 @@ incDark:"#1f2937"
 
 body{
 font-family:'Inter',sans-serif;
-scroll-behavior:smooth;
+background:#0f172a;
+color:white;
 }
 
-/* fundo tecnológico */
+/* fundo partículas */
 
-.tech-bg{
-background:
-radial-gradient(circle at 20% 20%, rgba(225,29,46,0.2), transparent 40%),
-radial-gradient(circle at 80% 80%, rgba(185,203,224,0.2), transparent 40%);
+#particles-js{
+position:absolute;
+width:100%;
+height:100%;
+z-index:0;
 }
 
-/* glow */
+/* canvas 3D */
 
-.glow{
-text-shadow:0 0 15px rgba(225,29,46,.7);
+#heart3d{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+opacity:.25;
 }
 
-/* cards */
+/* conteúdo */
 
-.card{
-transition:all .35s;
+.heroContent{
+position:relative;
+z-index:2;
 }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 20px 40px rgba(0,0,0,0.15);
+/* linhas digitais */
+
+.digital-lines{
+background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+background-size:40px 40px;
 }
 
 /* ECG */
 
 .ecg path{
-stroke:#ffffff;
+stroke:#ff3b3b;
 stroke-width:3;
 fill:none;
 stroke-dasharray:1200;
@@ -73,118 +80,51 @@ animation:beat 4s linear infinite;
 to{stroke-dashoffset:0}
 }
 
-/* animação scroll */
-
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
-
 </style>
 
 </head>
 
-<body class="bg-white text-gray-800">
-
-<!-- HEADER -->
-
-<header class="fixed w-full bg-white shadow z-50">
-
-<div class="max-w-7xl mx-auto flex justify-between items-center p-5">
-
-<h1 class="text-xl font-bold text-incRed">
-NIT INC
-</h1>
-
-<nav class="hidden md:flex gap-8 font-medium">
-
-<a href="#inicio">Início</a>
-<a href="#servicos">Serviços</a>
-<a href="#impacto">Impacto</a>
-<a href="#tecnologias">Tecnologias</a>
-
-</nav>
-
-</div>
-
-</header>
+<body>
 
 <!-- HERO -->
 
-<section id="inicio" class="tech-bg pt-36 pb-28 bg-gradient-to-r from-red-700 to-incRed text-white relative overflow-hidden">
+<section class="relative h-screen flex items-center justify-center text-center digital-lines">
 
-<!-- GRID TECNOLÓGICO -->
+<div id="particles-js"></div>
 
-<div class="absolute inset-0 opacity-20">
+<canvas id="heart3d"></canvas>
 
-<div class="grid grid-cols-12 h-full">
+<div class="heroContent max-w-4xl px-6">
 
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
-<div class="border-r border-white"></div>
+<h1 class="text-6xl font-bold mb-6">
 
-</div>
-
-</div>
-
-<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center px-6 relative">
-
-<div>
-
-<h1 class="text-5xl font-bold leading-tight glow">
-
-Inovação em  
-Cardiologia  
-e Tecnologia em Saúde
+NIT INC
 
 </h1>
 
-<p class="mt-6 text-lg opacity-90">
+<p class="text-xl opacity-90">
 
-O Núcleo de Inovação Tecnológica do Instituto Nacional de Cardiologia
-atua na proteção do conhecimento científico, desenvolvimento tecnológico
-e transferência de inovação para a sociedade.
+Núcleo de Inovação Tecnológica do  
+Instituto Nacional de Cardiologia
 
 </p>
 
-<button class="mt-8 bg-white text-incRed px-7 py-3 rounded-lg font-semibold hover:scale-105 transition">
+<p class="mt-6 opacity-80">
 
-Registrar Invenção
+Proteção de patentes, transferência de tecnologia e desenvolvimento
+de inovação científica em cardiologia.
 
-</button>
-
-</div>
-
-<div class="relative">
-
-<img
-src="https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg"
-class="rounded-xl shadow-2xl"
-/>
-
-<div class="absolute inset-0 rounded-xl border border-white opacity-40 animate-pulse"></div>
+</p>
 
 </div>
 
-</div>
+</section>
 
 <!-- ECG -->
 
-<svg class="ecg mt-20 w-full" viewBox="0 0 1200 200">
+<section class="bg-black py-10">
+
+<svg class="ecg w-full" viewBox="0 0 1200 200">
 
 <path d="M0 100 L150 100 L200 60 L250 140 L300 40 L350 160 L400 100 L600 100 L650 60 L700 140 L750 40 L800 160 L850 100 L1200 100"/>
 
@@ -192,146 +132,63 @@ class="rounded-xl shadow-2xl"
 
 </section>
 
-<!-- SERVIÇOS -->
+<!-- DASHBOARD -->
 
-<section id="servicos" class="py-24 bg-gray-100">
+<section class="py-24 text-center">
 
-<div class="max-w-7xl mx-auto px-6 text-center">
+<h2 class="text-4xl font-bold mb-16">
 
-<h2 class="text-4xl font-bold mb-16 reveal">
-Serviços do NIT
+Dashboard de Inovação
+
 </h2>
 
-<div class="grid md:grid-cols-3 gap-10">
+<div class="max-w-4xl mx-auto">
 
-<div class="card bg-white p-8 rounded-xl reveal">
-
-<h3 class="text-xl font-semibold text-incRed">
-Proteção de Patentes
-</h3>
-
-<p class="mt-4 text-gray-600">
-Apoio completo no registro de patentes e proteção da propriedade intelectual gerada nas pesquisas.
-</p>
-
-</div>
-
-<div class="card bg-white p-8 rounded-xl reveal">
-
-<h3 class="text-xl font-semibold text-incRed">
-Transferência de Tecnologia
-</h3>
-
-<p class="mt-4 text-gray-600">
-Conectamos pesquisa científica a empresas e parceiros interessados em inovação.
-</p>
-
-</div>
-
-<div class="card bg-white p-8 rounded-xl reveal">
-
-<h3 class="text-xl font-semibold text-incRed">
-Inovação Científica
-</h3>
-
-<p class="mt-4 text-gray-600">
-Estimulo ao desenvolvimento de tecnologias para a cardiologia e saúde digital.
-</p>
-
-</div>
-
-</div>
+<canvas id="patentesChart"></canvas>
 
 </div>
 
 </section>
 
-<!-- IMPACTO -->
+<!-- MAPA -->
 
-<section id="impacto" class="py-24">
+<section class="py-24">
 
-<div class="max-w-6xl mx-auto text-center px-6">
+<h2 class="text-4xl font-bold text-center mb-16">
 
-<h2 class="text-4xl font-bold mb-16 reveal">
-Impacto da Inovação
+Mapa de Inovação
+
 </h2>
 
-<div class="grid md:grid-cols-4 gap-10 text-center">
-
-<div class="reveal">
-<h3 class="text-5xl font-bold text-incRed counter" data-target="25">0</h3>
-<p class="mt-3">Patentes</p>
-</div>
-
-<div class="reveal">
-<h3 class="text-5xl font-bold text-incRed counter" data-target="18">0</h3>
-<p class="mt-3">Pesquisas</p>
-</div>
-
-<div class="reveal">
-<h3 class="text-5xl font-bold text-incRed counter" data-target="12">0</h3>
-<p class="mt-3">Parcerias</p>
-</div>
-
-<div class="reveal">
-<h3 class="text-5xl font-bold text-incRed counter" data-target="6">0</h3>
-<p class="mt-3">Startups</p>
-</div>
-
-</div>
-
-</div>
+<div id="map" class="h-96 max-w-5xl mx-auto rounded-xl"></div>
 
 </section>
 
 <!-- TECNOLOGIAS -->
 
-<section id="tecnologias" class="py-24 bg-gray-100">
+<section class="py-24 text-center bg-gray-900">
 
-<div class="max-w-7xl mx-auto px-6 text-center">
+<h2 class="text-4xl font-bold mb-16">
 
-<h2 class="text-4xl font-bold mb-16 reveal">
-Tecnologias em Destaque
+Tecnologias em Desenvolvimento
+
 </h2>
 
-<div class="grid md:grid-cols-3 gap-10">
+<div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
 
-<div class="card bg-white p-6 rounded-xl reveal">
-
-<h3 class="font-bold text-lg">
-Monitoramento Cardíaco Inteligente
-</h3>
-
-<p class="mt-3 text-gray-600">
-Tecnologia para acompanhamento remoto de pacientes cardíacos.
-</p>
-
+<div class="bg-black p-8 rounded-xl">
+<h3 class="font-bold text-xl">IA em Cardiologia</h3>
+<p class="mt-4 opacity-80">Análise inteligente de exames cardíacos.</p>
 </div>
 
-<div class="card bg-white p-6 rounded-xl reveal">
-
-<h3 class="font-bold text-lg">
-IA para Diagnóstico
-</h3>
-
-<p class="mt-3 text-gray-600">
-Sistema de inteligência artificial para análise de exames.
-</p>
-
+<div class="bg-black p-8 rounded-xl">
+<h3 class="font-bold text-xl">Monitoramento Remoto</h3>
+<p class="mt-4 opacity-80">Tecnologias para acompanhamento de pacientes.</p>
 </div>
 
-<div class="card bg-white p-6 rounded-xl reveal">
-
-<h3 class="font-bold text-lg">
-Biomateriais Médicos
-</h3>
-
-<p class="mt-3 text-gray-600">
-Pesquisa avançada em novos biomateriais para próteses.
-</p>
-
-</div>
-
+<div class="bg-black p-8 rounded-xl">
+<h3 class="font-bold text-xl">Biomateriais</h3>
+<p class="mt-4 opacity-80">Pesquisa em novos materiais médicos.</p>
 </div>
 
 </div>
@@ -340,79 +197,108 @@ Pesquisa avançada em novos biomateriais para próteses.
 
 <!-- FOOTER -->
 
-<footer class="bg-incDark text-white py-14">
+<footer class="py-12 text-center bg-black">
 
-<div class="max-w-6xl mx-auto text-center">
+<p>Instituto Nacional de Cardiologia</p>
 
-<h3 class="text-xl font-semibold">
-Núcleo de Inovação Tecnológica
-</h3>
+<p class="opacity-60 mt-2">
 
-<p class="mt-3">
-Instituto Nacional de Cardiologia
+© 2026 NIT INC
+
 </p>
-
-<p class="mt-5 text-sm opacity-70">
-© 2026 - Todos os direitos reservados
-</p>
-
-</div>
 
 </footer>
 
 <script>
 
-/* animação scroll */
+/* PARTICULAS */
 
-const reveals=document.querySelectorAll(".reveal")
+particlesJS("particles-js",{
 
-function reveal(){
+particles:{
 
-reveals.forEach(el=>{
+number:{value:60},
 
-const windowHeight=window.innerHeight
-const top=el.getBoundingClientRect().top
+size:{value:3},
 
-if(top<windowHeight-80){
-el.classList.add("active")
+line_linked:{enable:true},
+
+move:{speed:1}
+
 }
 
 })
 
-}
+/* GRÁFICO */
 
-window.addEventListener("scroll",reveal)
-reveal()
+new Chart(document.getElementById("patentesChart"),{
 
-/* contador */
+type:"bar",
 
-const counters=document.querySelectorAll(".counter")
+data:{
 
-counters.forEach(counter=>{
+labels:["2020","2021","2022","2023","2024"],
 
-const update=()=>{
+datasets:[{
 
-const target=+counter.dataset.target
-const value=+counter.innerText
+label:"Patentes",
 
-const increment=target/80
+data:[5,8,12,16,25]
 
-if(value<target){
-
-counter.innerText=Math.ceil(value+increment)
-setTimeout(update,30)
-
-}else{
-
-counter.innerText=target
+}]
 
 }
-
-}
-
-update()
 
 })
+
+/* MAPA */
+
+const map=L.map('map').setView([-22.9083,-43.1964],5)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
+
+L.marker([-22.9083,-43.1964]).addTo(map)
+.bindPopup("Instituto Nacional de Cardiologia")
+
+/* CORAÇÃO 3D */
+
+const canvas=document.getElementById("heart3d")
+
+const scene=new THREE.Scene()
+
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
+
+const renderer=new THREE.WebGLRenderer({canvas,alpha:true})
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+
+const geometry=new THREE.SphereGeometry(2,32,32)
+
+const material=new THREE.MeshBasicMaterial({color:0xff0000,wireframe:true})
+
+const heart=new THREE.Mesh(geometry,material)
+
+scene.add(heart)
+
+camera.position.z=5
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+heart.rotation.y+=0.01
+
+heart.scale.set(
+1+Math.sin(Date.now()*0.005)*0.1,
+1+Math.sin(Date.now()*0.005)*0.1,
+1+Math.sin(Date.now()*0.005)*0.1
+)
+
+renderer.render(scene,camera)
+
+}
+
+animate()
 
 </script>
 
