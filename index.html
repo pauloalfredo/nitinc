@@ -6,29 +6,49 @@
   <title>NIT INC | Inovação Tecnológica em Cardiologia Avançada</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* ----------------------------------------------------------- */
+    /* FONTES MUSEO SANS (Ajuste aqui com seus arquivos ou links)  */
+    /* ----------------------------------------------------------- */
+    
+    /* Exemplo se você tiver os arquivos locais .woff2 */
+    /*
+    @font-face {
+      font-family: 'Museo Sans';
+      src: url('/fonts/MuseoSans-300.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Museo Sans';
+      src: url('/fonts/MuseoSans-700.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+    */
+
+    /* Fallback caso a fonte não carregue (visual similar em peso) */
     :root {
       --font-family-base: 'Museo Sans', 'Montserrat', sans-serif;
-      --inc-red: #E22525;
-      --inc-dark: #333333;
     }
 
     body {
       font-family: var(--font-family-base);
-      font-weight: 300;
-      background: #080a10;
+      font-weight: 300; /* Museo Sans 300 padrão */
+      background: #080a10; /* Fundo mais escuro/profundo */
       color: #e2e8f0;
       overflow-x: hidden;
     }
 
     h1, h2, h3, h4, .font-bold {
-      font-weight: 700 !important;
+      font-weight: 700 !important; /* Museo Sans 700 */
       letter-spacing: -0.02em;
     }
 
+    /* Partículas de Fundo */
     #particles-js {
       position: absolute;
       width: 100%;
@@ -37,6 +57,7 @@
       opacity: 0.5;
     }
 
+    /* Holograma 3D do Coração */
     #heart3d {
       position: absolute;
       top: 0;
@@ -46,17 +67,22 @@
       z-index: 0;
       opacity: 0.4;
       pointer-events: none;
-      filter: drop-shadow(0 0 10px rgba(255, 59, 59, 0.5));
+      filter: drop-shadow(0 0 10px rgba(255, 59, 59, 0.5)); /* Brilho vermelho */
     }
 
-    .heroContent { position: relative; z-index: 2; }
+    .heroContent {
+      position: relative;
+      z-index: 2;
+    }
 
+    /* Linhas Digitais Tech */
     .digital-lines {
       background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 50px 50px;
     }
 
+    /* Animação ECG */
     .ecg path {
       stroke: #ff3b3b;
       stroke-width: 2;
@@ -67,62 +93,72 @@
       filter: drop-shadow(0 0 5px rgba(255, 59, 59, 0.8));
     }
 
-    @keyframes beat { to { stroke-dashoffset: 0; } }
+    @keyframes beat {
+      to { stroke-dashoffset: 0; }
+    }
 
+    /* Estilo de Cartão Tech (Glow Ciano) */
     .tech-card {
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid rgba(0, 255, 255, 0.1);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
       backdrop-filter: blur(10px);
     }
-
-    /* Estilo FAQ */
-    details summary { list-style: none; cursor: pointer; }
-    details summary::-webkit-details-marker { display: none; }
-    details[open] summary { color: #00ffff; }
   </style>
 </head>
 
 <body>
 
-  <header class="absolute top-0 w-full flex justify-between items-center px-12 py-8 z-30">
-    <div class="flex gap-6 text-2xl">
-      <a href="#" target="_blank" class="text-white hover:text-green-500 transition-all"><i class="fab fa-whatsapp"></i></a>
-      <a href="#" target="_blank" class="text-white hover:text-pink-500 transition-all"><i class="fab fa-instagram"></i></a>
-    </div>
-    <img src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" alt="Logo NIT INC" class="h-16 filter drop-shadow(0 0 8px rgba(255,255,255,0.3))">
-    <div class="w-24"></div> </header>
+  <header class="absolute top-0 w-full flex justify-center items-center p-8 z-10">
+    <img 
+      src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" 
+      alt="Logo NIT INC - Núcleo de Inovação Tecnológica"
+      class="h-16 filter drop-shadow(0 0 8px rgba(255,255,255,0.3))"
+    />
+  </header>
 
   <section class="relative h-screen flex items-center justify-center text-center digital-lines px-6">
     <div id="particles-js"></div>
     <canvas id="heart3d"></canvas>
-    <div class="heroContent max-w-5xl">
-      <div class="inline-block px-4 py-1 mb-4 rounded-full border border-cyan-500/30 bg-cyan-950/50 text-cyan-400 text-sm tracking-widest uppercase font-bold">Futuro da Cardiologia</div>
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">Núcleo de Inovação Tecnológica</h1>
-      <p class="text-xl md:text-2xl opacity-90 text-red-400 font-bold mb-10 tracking-tight">INSTITUTO NACIONAL DE CARDIOLOGIA</p>
-      <p class="mt-6 text-xl opacity-80 max-w-3xl mx-auto font-light leading-relaxed">Proteção de patentes, transferência de tecnologia e desenvolvimento de soluções de <span class="text-cyan-400 font-bold">IA e bioengenharia</span> aplicadas à saúde cardiovascular.</p>
-    </div>
-  </section>
 
-  <section class="py-24 bg-[#333333] px-6 border-y border-gray-800">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-8 text-white uppercase tracking-tighter">Quem somos nós</h2>
-      <p class="text-lg text-gray-300 font-light leading-relaxed">
-        O <strong>Instituto Nacional de Cardiologia (INC)</strong> é a unidade de referência do Ministério da Saúde para o tratamento de alta complexidade de doenças cardíacas. Além da assistência, possui competências ampliadas para ensino, pesquisa e inovação. Foi reconhecido como Instituição Científica, Tecnológica e de Inovação (ICT) pública em 21/07/2021, e em 06/11/2021 o <strong>NIT INC</strong> foi criado através da Portaria nº 200 de 24 de novembro de 2021.
+    <div class="heroContent max-w-5xl">
+      <div class="inline-block px-4 py-1 mb-4 rounded-full border border-cyan-500/30 bg-cyan-950/50 text-cyan-400 text-sm tracking-widest uppercase font-bold">
+        Futuro da Cardiologia
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+        Núcleo de Inovação Tecnológica
+      </h1>
+      <p class="text-xl md:text-2xl opacity-90 text-red-400 font-bold mb-10 tracking-tight">
+        INSTITUTO NACIONAL DE CARDIOLOGIA
+      </p>
+      <p class="mt-6 text-xl opacity-80 max-w-3xl mx-auto font-light leading-relaxed">
+        Proteção de patentes, transferência de tecnologia e desenvolvimento de soluções de <span class="text-cyan-400 font-bold">IA e bioengenharia</span> aplicadas à saúde cardiovascular.
       </p>
     </div>
   </section>
 
-  <section class="py-24 bg-[#050609] px-6 border-b border-gray-800">
+  <section class="py-24 bg-[#050609] px-6 border-y border-gray-800">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
       <div>
         <h2 class="text-4xl font-bold mb-6 text-white">Engenharia Cardiovascular de Ponta</h2>
-        <p class="text-lg text-gray-400 font-light leading-relaxed">Desenvolvemos e protegemos inovações em dispositivos médicos avançados, utilizando biomateriais e impressão 3D para próteses valvares personalizadas.</p>
+        <p class="text-lg text-gray-400 font-light leading-relaxed">
+          Desenvolvemos e protegemos inovações em dispositivos médicos avançados, utilizando biomateriais e impressão 3D para próteses valvares personalizadas e assistência circulatória mecânica.
+        </p>
       </div>
       <div class="tech-card p-4 rounded-2xl">
-        <img src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?q=80&w=800&auto=format&fit=crop" class="rounded-xl w-full h-80 object-cover grayscale opacity-70 hover:grayscale-0 transition-all">
+        <img 
+          src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?q=80&w=800&auto=format&fit=crop" 
+          alt="Visualização holográfica de bioengenharia cardíaca"
+          class="rounded-xl shadow-2xl object-cover w-full h-80 filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+        />
       </div>
     </div>
+  </section>
+
+  <section class="bg-black py-12 px-6">
+    <svg class="ecg w-full max-w-6xl mx-auto" viewBox="0 0 1200 200">
+      <path d="M0 100 L150 100 L200 60 L250 140 L300 40 L350 160 L400 100 L600 100 L650 60 L700 140 L750 40 L800 160 L850 100 L1200 100"/>
+    </svg>
   </section>
 
   <section class="py-28 text-center bg-[#080a10] px-6 digital-lines">
@@ -135,55 +171,31 @@
   <section class="py-24 bg-[#050609] px-6 border-y border-gray-800">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
       <div class="tech-card p-4 rounded-2xl order-2 md:order-1">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" class="rounded-xl w-full h-80 object-cover grayscale contrast-125 opacity-70 hover:grayscale-0 transition-all">
+        <img 
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" 
+          alt="Análise de IA em dados cardiológicos"
+          class="rounded-xl shadow-2xl object-cover w-full h-80 filter grayscale contrast-125 opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+        />
       </div>
       <div class="order-1 md:order-2">
         <h2 class="text-4xl font-bold mb-6 text-white">Inteligência Artificial e Diagnóstico</h2>
-        <p class="text-lg text-gray-400 font-light leading-relaxed">Nossa pesquisa foca no desenvolvimento de algoritmos de Machine Learning para a predição precoce de eventos cardiovasculares.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-24 bg-[#080a10] px-6 digital-lines">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-4xl font-bold mb-16 text-center text-white">NIT INC</h2>
-      <div class="grid gap-4">
-        <details class="tech-card p-6 rounded-xl"><summary class="text-xl font-bold flex justify-between">O que é considerado uma criação? <i class="fas fa-plus"></i></summary><p class="mt-4 text-gray-400 font-light">Qualquer invenção, modelo de utilidade, desenho industrial, software ou desenvolvimento tecnológico que possa gerar novos produtos ou processos.</p></details>
-        <details class="tech-card p-6 rounded-xl"><summary class="text-xl font-bold flex justify-between">O que é Inovação? <i class="fas fa-plus"></i></summary><p class="mt-4 text-gray-400 font-light">Produtos ou processos novos ou melhorados disponibilizados para uso geral.</p></details>
-        <details class="tech-card p-6 rounded-xl"><summary class="text-xl font-bold flex justify-between">O que é ICT e NIT? <i class="fas fa-plus"></i></summary><p class="mt-4 text-gray-400 font-light">A ICT é a instituição de pesquisa. O NIT é o núcleo que faz a gestão da inovação e das patentes.</p></details>
-        <details class="tech-card p-6 rounded-xl"><summary class="text-xl font-bold flex justify-between">O que é Patente? <i class="fas fa-plus"></i></summary><p class="mt-4 text-gray-400 font-light">É o título de propriedade temporária sobre uma invenção, garantindo exclusividade de uso econômico.</p></details>
-        <details class="tech-card p-6 rounded-xl border-l-4 border-red-500"><summary class="text-xl font-bold flex justify-between text-red-400">Publicação vs Proteção <i class="fas fa-exclamation-triangle"></i></summary><p class="mt-4 text-gray-300 font-light">A proteção deve ocorrer ANTES da publicação. Se publicar antes, pode perder o direito de patentear.</p></details>
+        <p class="text-lg text-gray-400 font-light leading-relaxed">
+          Nossa pesquisa foca no desenvolvimento de algoritmos de Machine Learning para a predição precoce de eventos cardiovasculares e análise avançada de imagens de ressonância e tomografia.
+        </p>
       </div>
     </div>
   </section>
 
   <section class="py-28 bg-[#080a10] px-6 relative">
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/scratches.png')]"></div>
     <h2 class="text-4xl font-bold text-center mb-20 text-white z-10 relative">Rede Global de Colaboração</h2>
-    <div id="map" class="h-[550px] w-full max-w-6xl mx-auto rounded-3xl shadow-2xl border-2 border-cyan-500/20"></div>
-  </section>
-
-  <section class="py-24 bg-[#050609] text-center px-6">
-    <div class="max-w-3xl mx-auto tech-card p-12 rounded-3xl border-t-4 border-red-500">
-      <h2 class="text-3xl font-bold mb-4 text-white">Possui mais dúvidas?</h2>
-      <p class="text-gray-400 mb-8 font-light italic">Para marcar um atendimento e entrar em contato conosco, preencha nosso formulário:</p>
-      <a href="#" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-full transition-all tracking-widest uppercase">Contato</a>
-    </div>
-  </section>
-
-  <section class="bg-black py-12 px-6">
-    <svg class="ecg w-full max-w-6xl mx-auto" viewBox="0 0 1200 200">
-      <path d="M0 100 L150 100 L200 60 L250 140 L300 40 L350 160 L400 100 L600 100 L650 60 L700 140 L750 40 L800 160 L850 100 L1200 100"/>
-    </svg>
+    <div id="map" class="h-[550px] w-full max-w-6xl mx-auto rounded-3xl shadow-2xl z-0 border-2 border-cyan-500/20"></div>
   </section>
 
   <footer class="py-16 text-center bg-black border-t border-gray-800">
-    <div class="flex justify-center gap-8 mb-8 text-3xl">
-      <a href="#" class="text-gray-500 hover:text-green-500 transition-colors"><i class="fab fa-whatsapp"></i></a>
-      <a href="#" class="text-gray-500 hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
-    </div>
     <img src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" alt="NIT Logo" class="h-10 mx-auto mb-6 opacity-50"/>
-    <p class="font-bold text-white text-lg">INSTITUTO NACIONAL DE CARDIOLOGIA</p>
-    <p class="opacity-60 mt-3 text-sm font-light">© 2026 NIT INC - Núcleo de Inovação Tecnológica.</p>
+    <p class="font-bold text-white text-lg">Instituto Nacional de Cardiologia</p>
+    <p class="opacity-60 mt-3 text-sm font-light">© 2026 NIT INC - Núcleo de Inovação Tecnológica. Todos os direitos reservados.</p>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -192,28 +204,84 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    /* Partículas */
-    particlesJS("particles-js", { particles: { number: { value: 50 }, color: { value: "#00ffff" }, opacity: { value: 0.2 }, line_linked: { enable: true, color: "#00ffff", opacity: 0.1 }, move: { speed: 0.8 } } });
-
-    /* Gráfico */
-    new Chart(document.getElementById("patentesChart").getContext('2d'), {
-      type: "line",
-      data: { labels: ["2020", "2021", "2022", "2023", "2024"], datasets: [{ label: "Patentes", data: [4, 7, 11, 18, 26], borderColor: '#00ffff', backgroundColor: 'rgba(0, 255, 255, 0.1)', fill: true, tension: 0.4 }] },
-      options: { plugins: { legend: { labels: { color: '#fff' } } }, scales: { x: { ticks: { color: '#aaa' } }, y: { ticks: { color: '#aaa' } } } }
+    /* PARTICULAS (Configuração mais discreta e tech) */
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 2, random: true },
+        line_linked: { enable: true, distance: 150, color: "#00ffff", opacity: 0.1, width: 1 },
+        move: { speed: 0.8, direction: "none", out_mode: "out" }
+      }
     });
 
-    /* Mapa */
-    const map = L.map('map', { zoomControl: false }).setView([-22.9083, -43.1964], 4);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
-    L.marker([-22.9083, -43.1964], {icon: L.divIcon({html: "<div style='background:#ff3b3b; width:12px; height:12px; border-radius:50%; box-shadow: 0 0 10px #ff3b3b;'></div>"})}).addTo(map);
+    /* GRÁFICO (Cores Sci-Fi) */
+    const ctx = document.getElementById("patentesChart").getContext('2d');
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["2020", "2021", "2022", "2023", "2024"],
+        datasets: [{
+          label: "Patentes e Registros",
+          data: [4, 7, 11, 18, 26],
+          borderColor: '#00ffff', // Ciano Tech
+          backgroundColor: 'rgba(0, 255, 255, 0.1)',
+          borderWidth: 3,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: '#00ffff',
+          pointHoverRadius: 8,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        color: '#888',
+        plugins: {
+          legend: { labels: { color: '#fff', font: { family: 'Museo Sans', weight: 700 } } }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: { color: '#aaa', font: { family: 'Museo Sans', weight: 300 } }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: { color: '#aaa', font: { family: 'Museo Sans', weight: 300 } },
+            beginAtZero: true
+          }
+        }
+      }
+    });
 
-    /* Coração 3D */
+    /* MAPA (Estilo Dark/CartoDB) */
+    const map = L.map('map', { zoomControl: false }).setView([-22.9083, -43.1964], 4);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; CartoDB'
+    }).addTo(map);
+
+    const cardioIcon = L.divIcon({
+      className: 'custom-div-icon',
+      html: "<div style='background-color:#ff3b3b; width:12px; height:12px; rounded:50%; box-shadow: 0 0 10px #ff3b3b;'></div>",
+      iconSize: [12, 12],
+      iconAnchor: [6, 6]
+    });
+
+    L.marker([-22.9083, -43.1964], {icon: cardioIcon}).addTo(map)
+      .bindPopup("<b style='color:#000'>INC / NIT</b><br><span style='color:#333'>Rio de Janeiro</span>")
+      .openPopup();
+
+    /* CORAÇÃO 3D HOLOGRÁFICO (Pontos/Partículas em vez de malha) */
     const canvas = document.getElementById("heart3d");
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    
     renderer.setSize(window.innerWidth, window.innerHeight);
 
+    // Geometria do Coração
     const shape = new THREE.Shape();
     const x = -2.5, y = -5;
     shape.moveTo(x + 2.5, y + 2.5);
@@ -224,22 +292,51 @@
     shape.bezierCurveTo(x + 8, y + 3.5, x + 8, y, x + 5, y);
     shape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
 
-    const geometry = new THREE.ExtrudeGeometry(shape, { depth: 1, bevelEnabled: true });
-    geometry.center();
-    const material = new THREE.PointsMaterial({ color: 0xff3b3b, size: 0.15, transparent: true, opacity: 0.8 });
-    const heart = new THREE.Points(geometry, material);
-    heart.rotation.x = Math.PI;
-    scene.add(heart);
+    const extrudeSettings = { depth: 1, bevelEnabled: true, bevelSegments: 3, steps: 2, bevelSize: 0.5, bevelThickness: 0.5 };
+    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    
+    geometry.computeBoundingBox();
+    const offset = geometry.boundingBox.getCenter(new THREE.Vector3());
+    geometry.translate(-offset.x, -offset.y, -offset.z);
+
+    // ALTERAÇÃO: Usando PointsMaterial para visual holográfico
+    const material = new THREE.PointsMaterial({ 
+      color: 0xff3b3b, 
+      size: 0.15, 
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AddBlending // Efeito de brilho
+    });
+    const heartPoints = new THREE.Points(geometry, material);
+    
+    heartPoints.rotation.x = Math.PI; // Corrigir orientação
+    scene.add(heartPoints);
+
     camera.position.z = 15;
 
     function animate() {
       requestAnimationFrame(animate);
-      heart.rotation.y += 0.003;
+      
+      // Rotação suave
+      heartPoints.rotation.y += 0.003;
+      
+      // Pulsação suave (escala)
       const pulse = 1 + Math.sin(Date.now() * 0.004) * 0.04;
-      heart.scale.set(pulse, pulse, pulse);
+      heartPoints.scale.set(pulse, pulse, pulse);
+      
+      // Pequena oscilação de opacidade para efeito de brilho
+      material.opacity = 0.6 + Math.sin(Date.now() * 0.01) * 0.2;
+
       renderer.render(scene, camera);
     }
     animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
   </script>
 </body>
 </html>
