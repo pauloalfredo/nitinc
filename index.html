@@ -30,11 +30,11 @@
             overflow-x: hidden;
         }
 
-        /* CORREÇÃO DO 'G' CORTADO: Aumentando o line-height e removendo overflow restritivo */
+        /* CORREÇÃO DO 'G' CORTADO */
         h1, h2, h3 {
             font-weight: 700 !important;
             letter-spacing: -0.02em;
-            line-height: 1.3 !important; /* Espaço para o 'g' */
+            line-height: 1.3 !important; 
             padding-bottom: 0.2em;
         }
 
@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.4;
+            opacity: 0.6; /* Aumentado levemente para destacar as redes */
         }
 
         #heart3d {
@@ -111,7 +111,7 @@
         </div>
         
         <div class="flex items-center gap-6">
-            <img src="https://nitinc.com.br/wp-content/uploads/2023/07/Logo-INC_Prancheta-11-scaled-300x300.jpg" alt="Logo NIT" class="h-16 mix-blend-screen grayscale brightness-200">
+            <img src="https://nitinc.com.br/wp-content/uploads/2023/07/Logo-INC_Prancheta-11-scaled-300x300.jpg" alt="Logo NIT" class="h-16 rounded-md">
             <div class="h-12 w-px bg-white/20"></div>
             <img src="https://nitinc.com.br/wp-content/uploads/2025/02/LOGO-SIMPLES-1.png" alt="Logo INC" class="h-14">
         </div>
@@ -139,7 +139,7 @@
 
     <section class="py-32 bg-[#111111] border-y border-white/5 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <img src="https://nitinc.com.br/wp-content/uploads/2023/07/Logo-INC_Prancheta-11-scaled-300x300.jpg" alt="NIT Icon" class="w-16 h-16 mx-auto mb-8 opacity-60 mix-blend-screen brightness-150">
+            <img src="https://nitinc.com.br/wp-content/uploads/2023/07/Logo-INC-22-300x300.jpg" alt="Logo INC 22" class="w-24 h-24 mx-auto mb-8 object-contain rounded-xl">
             
             <h2 class="text-4xl font-bold text-white mb-10 uppercase tracking-tighter">Quem somos nós</h2>
             <div class="space-y-8 text-xl text-gray-300 font-light leading-relaxed">
@@ -157,7 +157,7 @@
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
             <div class="order-2 md:order-1">
                 <div class="tech-card p-2 rounded-[2.5rem] overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1581093458791-9f3c3250bb8b?q=80&w=800&auto=format&fit=crop" alt="Engenharia Médica" class="rounded-[2rem] w-full h-[600px] object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Engenharia Médica" class="rounded-[2rem] w-full h-[600px] object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                 </div>
             </div>
             <div class="order-1 md:order-2">
@@ -199,22 +199,51 @@
 
     <section class="py-32 bg-[#080a10] px-6 digital-lines">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-white uppercase tracking-widest">NIT <span class="text-red-600">INC</span> - FAQ</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-white uppercase tracking-widest">Perguntas <span class="text-red-600">Frequentes</span></h2>
             <div class="space-y-6">
+                
                 <details class="tech-card p-8 rounded-2xl group">
                     <summary class="text-xl font-bold flex justify-between items-center">O que é considerado uma criação? <i class="fas fa-plus text-blue-300"></i></summary>
-                    <p class="mt-6 text-gray-400 font-light leading-relaxed">Qualquer invenção, modelo de utilidade, desenho industrial, software ou desenvolvimento tecnológico que gere novos produtos ou processos.</p>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">Qualquer invenção, modelo de utilidade, desenho industrial, programa de computador, topografia de circuito integrado, nova cultivar ou cultivar essencialmente derivada e qualquer outro desenvolvimento tecnológico que possa acarretar o surgimento de um novo produto ou processo ou aperfeiçoamento incremental, obtida por um ou mais criadores.</p>
                 </details>
+
+                <details class="tech-card p-8 rounded-2xl group">
+                    <summary class="text-xl font-bold flex justify-between items-center">O que é Inovação? <i class="fas fa-plus text-blue-300"></i></summary>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">São produtos ou processos novos ou melhorados, que diferem de produtos e processos anteriores, e que são disponibilizados para usuários potenciais (produtos) ou para uso geral (processos).</p>
+                </details>
+
+                <details class="tech-card p-8 rounded-2xl group">
+                    <summary class="text-xl font-bold flex justify-between items-center">O que é ICT? <i class="fas fa-plus text-blue-300"></i></summary>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">Instituição Científica Tecnológica é o órgão da administração pública, que inclua em sua missão institucional a pesquisa básica ou aplicada de caráter científico ou tecnológico ou o desenvolvimento de novos produtos, serviços ou processos.</p>
+                </details>
+
+                <details class="tech-card p-8 rounded-2xl group">
+                    <summary class="text-xl font-bold flex justify-between items-center">O que é NIT? <i class="fas fa-plus text-blue-300"></i></summary>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">Núcleo de Inovação Tecnológica é uma estrutura instituída por uma ou mais ICTs, que tenha por finalidade a gestão de política institucional de inovação e por competências mínimas as atribuições previstas para fins de cumprimento da Lei N° 10.973/04, responsável pela coordenação, articulação, gestão e execução da política de inovação.</p>
+                </details>
+
+                <details class="tech-card p-8 rounded-2xl group">
+                    <summary class="text-xl font-bold flex justify-between items-center">Qual a importância do NIT? <i class="fas fa-plus text-blue-300"></i></summary>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">Os NITs são importantes para os pesquisadores por proteger a propriedade intelectual, dar forma à inovação, identificar oportunidades de transferência de tecnologia e oferecer acesso a recursos e infraestrutura de pesquisa de alto nível.</p>
+                </details>
+
+                <details class="tech-card p-8 rounded-2xl group">
+                    <summary class="text-xl font-bold flex justify-between items-center">O que é Patente? <i class="fas fa-plus text-blue-300"></i></summary>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">É um título de propriedade temporária sobre uma invenção ou modelo de utilidade, outorgados pelo Estado aos inventores ou outras pessoas físicas ou jurídicas detentoras de direitos sobre a criação que lhes garante a exclusividade de uso econômico de sua criação.</p>
+                </details>
+
                 <details class="tech-card p-8 rounded-2xl group border-l-4 border-red-600">
-                    <summary class="text-xl font-bold flex justify-between items-center text-red-500">Publicação vs. Proteção <i class="fas fa-exclamation-triangle"></i></summary>
-                    <div class="mt-6 text-gray-300 bg-red-950/20 p-6 rounded-xl">
-                        A proteção deve ocorrer <strong>ANTES</strong> da publicação. Se houver divulgação prévia (artigos, congressos), perde-se o direito à patente.
+                    <summary class="text-xl font-bold flex justify-between items-center text-red-500">Tenho uma pesquisa potencialmente inovadora e pretendo publicá-la. Isso pode inviabilizar uma futura proteção intelectual? <i class="fas fa-exclamation-triangle"></i></summary>
+                    <div class="mt-6 text-gray-300 bg-red-950/20 p-6 rounded-xl font-light leading-relaxed">
+                        Sim. A proteção das criações deve ocorrer antes da publicação ou de qualquer outra forma de divulgação. Cientes disso, os pesquisadores mais experientes e familiarizados com o tema da propriedade intelectual já se programam tanto para a elaboração do artigo quanto da respectiva patente (ou outra forma de proteção). A dúvida entre patentear ou publicar é uma mera questão de “timing”. Estas ações não se excluem. Não há impedimentos para publicar e patentear, mas é primordial ter em mente que, nestes casos, a ordem das escolhas afeta profundamente o resultado. Havendo necessidade de maiores esclarecimentos, o NIT do INC pode e deve ser procurado.
                     </div>
                 </details>
+
                 <details class="tech-card p-8 rounded-2xl group">
-                    <summary class="text-xl font-bold flex justify-between items-center">O que é uma ICT? <i class="fas fa-plus text-blue-300"></i></summary>
-                    <p class="mt-6 text-gray-400 font-light italic">Instituição Científica, Tecnológica e de Inovação. Órgão da administração pública que tem por missão a pesquisa básica ou aplicada.</p>
+                    <summary class="text-xl font-bold flex justify-between items-center">Sou aluno e meu trabalho de final de curso pode ensejar proteção intelectual. O que devo fazer? <i class="fas fa-plus text-blue-300"></i></summary>
+                    <p class="mt-6 text-gray-400 font-light leading-relaxed">Tanto as qualificações quanto as defesas de trabalhos de fim de curso que envolverem conhecimentos passíveis de serem protegidos por direitos de propriedade intelectual devem ser realizadas em bancas fechadas nas quais os participantes assinam um termo de confidencialidade e sigilo. O ideal é conversar sobre esta possibilidade com o seu orientador e, em caso de dúvida, buscar o auxílio junto ao NIT do INC.</p>
                 </details>
+
             </div>
         </div>
     </section>
@@ -224,7 +253,7 @@
         <div id="map" class="h-[600px] w-full max-w-6xl mx-auto rounded-[3rem] border border-white/10 shadow-2xl"></div>
     </section>
 
-    <section class="py-32 bg-[#080a10] px-6">
+    <section class="py-32 bg-black px-6">
         <div class="max-w-3xl mx-auto tech-card p-16 rounded-[3rem] text-center border-t-2 border-red-600">
             <h2 class="text-4xl font-bold mb-6 text-white">Fale Conosco</h2>
             <p class="text-xl text-gray-400 mb-10 font-light">Possui uma ideia ou projeto? Nossa equipe de gestão está pronta para orientar seu desenvolvimento.</p>
@@ -254,18 +283,31 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        /* 1. PARTICLES (AZUL FUMÉE) */
+        /* 1. PARTICLES: BOLINHAS INVISÍVEIS, REDES ATIVAS NO MOUSE */
         particlesJS("particles-js", {
             particles: {
-                number: { value: 60 },
+                number: { value: 80, density: { enable: true, value_area: 800 } },
                 color: { value: "#5a7d9a" },
-                opacity: { value: 0.3 },
-                line_linked: { enable: true, distance: 150, color: "#5a7d9a", opacity: 0.1, width: 1 },
-                move: { speed: 1.2 }
-            }
+                shape: { type: "circle" },
+                opacity: { value: 0 }, /* Deixa as bolinhas invisíveis */
+                size: { value: 0 },    /* Reduz o tamanho a zero */
+                line_linked: { enable: true, distance: 150, color: "#5a7d9a", opacity: 0.2, width: 1 }, /* Mantém a rede sutil no fundo */
+                move: { enable: true, speed: 1 }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" }, /* A rede foca no mouse */
+                    onclick: { enable: false }
+                },
+                modes: {
+                    grab: { distance: 200, line_linked: { opacity: 0.6 } }
+                }
+            },
+            retina_detect: true
         });
 
-        /* 2. CHART (ESTILO CÓDIGO 1 COM COR FUMÉE) */
+        /* 2. CHART */
         const ctx = document.getElementById("patentesChart").getContext('2d');
         const grad = ctx.createLinearGradient(0, 0, 0, 400);
         grad.addColorStop(0, 'rgba(90, 125, 154, 0.4)');
@@ -297,14 +339,14 @@
             }
         });
 
-        /* 3. MAPA (FILTRO FUMÉE DARK) */
+        /* 3. MAPA */
         const map = L.map('map', { zoomControl: false }).setView([-22.9083, -43.1964], 3);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
         L.marker([-22.9083, -43.1964], {
             icon: L.divIcon({ html: `<div style="background:var(--inc-red); width:18px; height:18px; border-radius:50%; box-shadow: 0 0 20px var(--inc-red); border:2px solid white;"></div>`, className: '' })
         }).addTo(map);
 
-        /* 4. CORAÇÃO 3D (LÓGICA MATEMÁTICA COMPLETA CÓDIGO 1) */
+        /* 4. CORAÇÃO 3D */
         const canvas = document.getElementById("heart3d");
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
